@@ -649,12 +649,18 @@ function setup_cpt() {
 		'show_in_menu'         => false,
 		'query_var'            => false,
 		'rewrite'              => false,
-		'taxonomies'           => [ 'dt_ext_connection_group' ],
 		'capability_type'      => 'post',
 		'hierarchical'         => false,
 		'supports'             => array( 'title' ),
 		'register_meta_box_cb' => __NAMESPACE__ . '\add_meta_boxes',
 	);
+
+	/**
+	 * Filter to alter `dt_ext_connection` post type arguments
+	 *
+	 * @param array $args
+	 */
+	$args = apply_filters( 'dt_before_setup_cpt', $args );
 
 	register_post_type( 'dt_ext_connection', $args );
 }
